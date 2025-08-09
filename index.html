@@ -2,185 +2,204 @@
 <html lang="pt-BR" data-theme="light">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Portfólio Premium — Venda seus Templates</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Portfólio Premium — VTR.s</title>
+  <meta name="description" content="Portfólio premium para vender templates e projetos web. UI moderna, modo claro/escuro, responsivo." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Poppins:wght@600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <meta name="description" content="Venda templates e sites prontos. Portfólio profissional com modo escuro/claro e sistema de preview." />
 </head>
-<body class="site">
-  <!-- Header -->
-  <header class="header">
+<body>
+  <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="#">PortDev<span class="dot">.</span></a>
-
-      <nav class="nav" id="nav">
-        <a class="nav-link" href="#home">Início</a>
-        <a class="nav-link" href="#projects">Projetos</a>
-        <a class="nav-link" href="#services">Serviços</a>
-        <a class="nav-link" href="#pricing">Preços</a>
-        <a class="nav-link" href="#contact">Contato</a>
+      <a class="brand" href="#">VTR.s <span class="badge">Premium</span></a>
+      <nav class="nav">
+        <a href="#projetos">Projetos</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#contato">Contato</a>
       </nav>
-
-      <div class="controls">
-        <button id="theme-toggle" class="icon-btn" aria-label="Alternar tema">🌗</button>
-        <button id="menu-btn" class="icon-btn mobile-only" aria-label="Abrir menu">☰</button>
+      <div class="actions">
+        <button id="theme-toggle" class="btn icon" aria-label="Alternar tema">🌙</button>
+        <a class="btn primary" href="#contato">Comprar</a>
+        <button class="hamburger" id="menu-btn" aria-label="Abrir menu">☰</button>
       </div>
-    </div>
-
-    <!-- Mobile menu -->
-    <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
-      <nav class="mobile-nav">
-        <a href="#home" class="mobile-link">Início</a>
-        <a href="#projects" class="mobile-link">Projetos</a>
-        <a href="#services" class="mobile-link">Serviços</a>
-        <a href="#pricing" class="mobile-link">Preços</a>
-        <a href="#contact" class="mobile-link">Contato</a>
-      </nav>
-      <div class="mobile-footer">Venda seus sites. Receba via Pix, PayPal ou transferência.</div>
     </div>
   </header>
 
-  <!-- Hero -->
-  <section id="home" class="hero">
-    <div class="container hero-grid">
-      <div class="hero-left">
-        <h1 class="hero-title">Venda <span class="accent">templates</span> e sites prontos — <span class="muted">profissional e responsivo</span></h1>
-        <p class="lead">Portfólio pronto para divulgar e vender seus projetos com páginas de demonstração, compra e suporte.</p>
-        <div class="hero-cta">
-          <a href="#projects" class="btn btn-primary">Ver Projetos</a>
-          <a href="#contact" class="btn btn-outline">Me contratar</a>
-        </div>
-
-        <ul class="features">
-          <li>Modo escuro/claro automático e manual</li>
-          <li>Galeria com modal e preview em tempo real</li>
-          <li>Fácil exportação de template + ZIP (opcional)</li>
-        </ul>
-      </div>
-
-      <div class="hero-right">
-        <div class="device-mock">
-          <img id="main-preview" src="https://placehold.co/800x520?text=Preview" alt="Preview do template" />
-          <div class="badge">Destaque</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Projects -->
-  <section id="projects" class="section">
-    <div class="container">
-      <div class="section-head">
-        <h2>Projetos <span class="accent">disponíveis</span></h2>
-        <p class="muted">Modelos e sites prontos que você pode comprar, customizar e revender.</p>
-      </div>
-
-      <div class="grid projects-grid" id="projects-grid">
-        <!-- Project cards serão injetados via script.js -->
-      </div>
-
-      <div class="center">
-        <button id="load-more" class="btn btn-outline">Carregar mais</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- Services -->
-  <section id="services" class="section alt">
-    <div class="container">
-      <h2>Serviços</h2>
-      <div class="cards-row">
-        <div class="card">
-          <h3>Customização</h3>
-          <p>Adapto o template à identidade visual do cliente, layout e conteúdos.</p>
-        </div>
-        <div class="card">
-          <h3>Hospedagem & Suporte</h3>
-          <p>Configuro hospedagem, domínio e faço manutenção mensal.</p>
-        </div>
-        <div class="card">
-          <h3>SEO & Performance</h3>
-          <p>Otimização para velocidade e indexação em mecanismos de busca.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Pricing -->
-  <section id="pricing" class="section">
-    <div class="container">
-      <h2>Planos</h2>
-      <div class="pricing-row">
-        <div class="price-card">
-          <h3>Template Único</h3>
-          <div class="price">R$99</div>
-          <ul>
-            <li>1 licença</li>
-            <li>Instalação grátis</li>
-          </ul>
-          <a class="btn" href="#contact">Comprar</a>
-        </div>
-        <div class="price-card featured">
-          <h3>Pacote Profissional</h3>
-          <div class="price">R$299</div>
-          <ul>
-            <li>5 licenças</li>
-            <li>Suporte 30 dias</li>
-          </ul>
-          <a class="btn btn-primary" href="#contact">Comprar</a>
-        </div>
-        <div class="price-card">
-          <h3>Assinatura</h3>
-          <div class="price">R$49/mês</div>
-          <ul>
-            <li>Templates novos</li>
-            <li>Atualizações</li>
-          </ul>
-          <a class="btn" href="#contact">Assinar</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact -->
-  <section id="contact" class="section alt">
-    <div class="container">
-      <h2>Contato</h2>
-      <div class="contact-grid">
-        <form id="contact-form" class="contact-form">
-          <input name="name" placeholder="Seu nome" required />
-          <input name="email" type="email" placeholder="Seu e-mail" required />
-          <textarea name="message" rows="5" placeholder="Como posso ajudar?" required></textarea>
-          <div class="form-actions">
-            <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
-            <button type="button" id="clear-form" class="btn btn-outline">Limpar</button>
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-left">
+          <h1>Templates e projetos web <span class="accent">prontos</span> para vender.</h1>
+          <p class="lead">Portfólio profissional para apresentar e vender seus sites. Layouts modernos, responsivos e de alta conversão. Inclui modo claro/escuro e previews interativos.</p>
+          <div class="hero-cta">
+            <a href="#projetos" class="btn large">Ver Projetos</a>
+            <a href="#contato" class="btn ghost">Solicitar orçamento</a>
           </div>
+          <ul class="highlights">
+            <li>• 100% responsivo</li>
+            <li>• Dark/Light automático</li>
+            <li>• Pronto para GitHub Pages</li>
+          </ul>
+        </div>
+        <div class="hero-right">
+          <div class="device-mock">
+            <img src="https://images.unsplash.com/photo-1523475496153-3d6ccf18b6b5?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="Mockup" loading="lazy">
+            <div class="device-ribbon">Demo Interativa</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projetos" class="section projects">
+      <div class="container">
+        <div class="section-header">
+          <h2>Projetos</h2>
+          <p>Filtre por categoria e abra previews. Cada card contém detalhes e botão para comprar / ver código.</p>
+        </div>
+
+        <div class="filters">
+          <button class="filter active" data-filter="*">Todos</button>
+          <button class="filter" data-filter="landing">Landing</button>
+          <button class="filter" data-filter="ecommerce">E‑commerce</button>
+          <button class="filter" data-filter="dashboard">Dashboard</button>
+        </div>
+
+        <div id="projects-grid" class="grid">
+          <!-- projeto exemplo -->
+          <article class="card" data-category="landing">
+            <img class="card-img" src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="Landing">
+            <div class="card-body">
+              <h3>Landing – Conversão Alta</h3>
+              <p class="muted">Design moderno com formulário e integração fácil.</p>
+              <div class="card-actions">
+                <button class="btn small" data-action="preview" data-title="Landing – Conversão Alta" data-src="project-previews/landing.html">Preview</button>
+                <button class="btn outline small" data-action="buy" data-id="landing-001">Comprar</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="card" data-category="ecommerce">
+            <img class="card-img" src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="Ecommerce">
+            <div class="card-body">
+              <h3>Loja Rápida</h3>
+              <p class="muted">Carrinho, checkout e integração com pagamentos.</p>
+              <div class="card-actions">
+                <button class="btn small" data-action="preview" data-title="Loja Rápida" data-src="project-previews/shop.html">Preview</button>
+                <button class="btn outline small" data-action="buy" data-id="shop-001">Comprar</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="card" data-category="dashboard">
+            <img class="card-img" src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="Dashboard">
+            <div class="card-body">
+              <h3>Admin Dashboard</h3>
+              <p class="muted">Gráficos, tabelas e componentes reutilizáveis.</p>
+              <div class="card-actions">
+                <button class="btn small" data-action="preview" data-title="Admin Dashboard" data-src="project-previews/dashboard.html">Preview</button>
+                <button class="btn outline small" data-action="buy" data-id="dash-001">Comprar</button>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="sobre" class="section about">
+      <div class="container about-grid">
+        <div>
+          <h2>Sobre o autor</h2>
+          <p>Olá — eu sou <strong>VTR.s</strong>, criador de templates e sites prontos para quem quer vender projetos com aparência profissional. Entrego código limpo, documentação e previews.</p>
+          <ul class="meta-list">
+            <li>• Entrega pronta para produção</li>
+            <li>• Compatível com GitHub Pages</li>
+            <li>• Design focado em conversão</li>
+          </ul>
+        </div>
+        <div class="skills">
+          <div class="skill"><span>HTML</span><progress value="95" max="100"></progress></div>
+          <div class="skill"><span>CSS</span><progress value="92" max="100"></progress></div>
+          <div class="skill"><span>JavaScript</span><progress value="90" max="100"></progress></div>
+          <div class="skill"><span>Design</span><progress value="88" max="100"></progress></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="servicos" class="section services">
+      <div class="container">
+        <h2>Serviços</h2>
+        <div class="services-grid">
+          <div class="service-card">
+            <h3>Template Personalizado</h3>
+            <p>Adaptação do template para sua marca e conteúdo.</p>
+          </div>
+          <div class="service-card">
+            <h3>Conversão para WordPress</h3>
+            <p>Transformo seu template em tema WordPress leve.</p>
+          </div>
+          <div class="service-card">
+            <h3>Integração de Pagamentos</h3>
+            <p>Checkout e integrações com APIs de pagamento.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contato" class="section contact">
+      <div class="container contact-grid">
+        <form id="contact-form" class="contact-form">
+          <h2>Solicitar Orçamento</h2>
+          <label>Nome<input name="name" required></label>
+          <label>Email<input name="email" type="email" required></label>
+          <label>Mensagem<textarea name="message" rows="5" required></textarea></label>
+          <div class="form-actions">
+            <button type="submit" class="btn primary">Enviar</button>
+            <button type="reset" class="btn ghost">Limpar</button>
+          </div>
+          <p class="form-note muted">Você receberá uma resposta em até 24h (exemplo).</p>
         </form>
 
-        <div class="contact-info">
-          <h3>Atendimento</h3>
-          <p>Envie propostas pelo e-mail: <a href="mailto:contato@seudominio.com">contato@seudominio.com</a></p>
-          <p>Pagamento via Pix, PayPal ou transferência.</p>
+        <div class="contact-side">
+          <h3>Contato direto</h3>
+          <p>Email: <a href="mailto:contato@vtrs.dev">contato@vtrs.dev</a></p>
+          <p>WhatsApp: <a href="#">(00) 0 0000-0000</a></p>
+          <div class="socials">
+            <a href="#">GitHub</a>
+            <a href="#">Behance</a>
+            <a href="#">Dribbble</a>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
-  <!-- Footer -->
-  <footer class="footer">
+  <footer class="site-footer">
     <div class="container footer-inner">
-      <div>© <span id="year"></span> PortDev — Todos os direitos reservados.</div>
-      <div class="socials">
-        <a href="#">Instagram</a>
-        <a href="#">GitHub</a>
-        <a href="#">LinkedIn</a>
+      <small>© <span id="year"></span> VTR.s — Todos os direitos reservados.</small>
+      <div class="footer-links">
+        <a href="#termos">Termos</a>
+        <a href="#privacidade">Privacidade</a>
       </div>
     </div>
   </footer>
 
+  <!-- Modal preview -->
+  <div id="modal" class="modal" aria-hidden="true">
+    <div class="modal-dialog">
+      <button id="modal-close" class="modal-close" aria-label="Fechar">✕</button>
+      <h3 id="modal-title">Preview</h3>
+      <iframe id="modal-iframe" src="about:blank" title="Preview" sandbox="allow-scripts allow-same-origin"></iframe>
+      <div class="modal-actions">
+        <a id="modal-code" class="btn outline" href="#" target="_blank">Ver código</a>
+        <button id="modal-buy" class="btn primary">Comprar</button>
+      </div>
+    </div>
+  </div>
+
   <script src="script.js"></script>
 </body>
-        </html>
+              </html>
