@@ -1,10 +1,455 @@
-<html>
-   <title>#459kd8</title>  
-<h1>Bem-vindo</h1>
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio Criativo | Venda seus Projetos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary-light: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary-light: #f43f5e;
+            --secondary-dark: #e11d48;
+            --text-light: #1e293b;
+            --text-dark: #f8fafc;
+            --bg-light: #f8fafc;
+            --bg-dark: #1e293b;
+            --card-light: #ffffff;
+            --card-dark: #334155;
+        }
 
+        [data-theme="light"] {
+            --primary: var(--primary-light);
+            --secondary: var(--secondary-light);
+            --text: var(--text-light);
+            --bg: var(--bg-light);
+            --card: var(--card-light);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
 
-  <a>1 project ok</a>
-   <p>Esse e um novo teste para qualquer project 24</p>
-   <h2>novo projeto ok 2.op</h2>
-   
-</html>
+        [data-theme="dark"] {
+            --primary: var(--primary-dark);
+            --secondary: var(--secondary-dark);
+            --text: var(--text-dark);
+            --bg: var(--bg-dark);
+            --card: var(--card-dark);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.25);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            transition: all 0.3s ease;
+        }
+
+        .theme-transition * {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .card {
+            background-color: var(--card);
+            box-shadow: var(--shadow);
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 0;
+        }
+
+        .project-card:hover::before {
+            opacity: 0.1;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary);
+            color: white;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .animate-pulse-slow {
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        .tech-tag {
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .hero-pattern {
+            background-image: radial-gradient(circle, rgba(99, 102, 241, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background-color: var(--card);
+                padding: 2rem;
+                transition: right 0.3s ease;
+                z-index: 100;
+            }
+
+            .nav-menu.active {
+                right: 0;
+            }
+        }
+    </style>
+</head>
+<body class="theme-transition">
+    <!-- Header/Navigation -->
+    <header class="sticky top-0 z-50 bg-white/80 dark:bg-gray-800/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold gradient-text">PortDev</a>
+            
+            <div class="hamburger" id="hamburger">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </div>
+
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#home" class="nav-link font-medium">Início</a>
+                <a href="#projects" class="nav-link font-medium">Projetos</a>
+                <a href="#services" class="nav-link font-medium">Serviços</a>
+                <a href="#about" class="nav-link font-medium">Sobre</a>
+                <a href="#contact" class="nav-link font-medium">Contato</a>
+                <button id="theme-toggle" class="p-2 rounded-full focus:outline-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path id="theme-icon" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" />
+                    </svg>
+                </button>
+            </nav>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="nav-menu" id="nav-menu">
+            <div class="flex justify-end p-4">
+                <button id="close-menu" class="p-2 rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <div class="flex flex-col space-y-6 px-8 py-4">
+                <a href="#home" class="nav-link font-medium text-lg">Início</a>
+                <a href="#projects" class="nav-link font-medium text-lg">Projetos</a>
+                <a href="#services" class="nav-link font-medium text-lg">Serviços</a>
+                <a href="#about" class="nav-link font-medium text-lg">Sobre</a>
+                <a href="#contact" class="nav-link font-medium text-lg">Contato</a>
+                <button id="mobile-theme-toggle" class="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                        <path id="mobile-theme-icon" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" />
+                    </svg>
+                    Alternar Tema
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-pattern py-20">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-12">
+                <div class="md:w-1/2 animate-fade-in">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+                        Transforme suas <span class="gradient-text">ideias</span> em experiências digitais incríveis
+                    </h1>
+                    <p class="text-lg md:text-xl mb-8 opacity-90">
+                        Sites personalizados com designs impressionantes e tecnologia de ponta para impulsionar seu negócio online.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#contact" class="btn-primary px-6 py-3 rounded-lg font-medium transition hover:opacity-90">
+                            Comece seu Projeto
+                        </a>
+                        <a href="#projects" class="border border-primary text-primary px-6 py-3 rounded-lg font-medium transition hover:bg-primary hover:text-white">
+                            Ver Portfólio
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 animate-float">
+                    <img src="https://placehold.co/1600x1200" alt="Designer trabalhando em um laptop moderno com uma tela cheia de elementos de UI/UX cuidadosamente organizados" class="rounded-xl shadow-xl" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-gray-100 dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Nossos <span class="gradient-text">Projetos</span></h2>
+                <p class="text-lg max-w-2xl mx-auto opacity-90">
+                    Explore nossa seleção de projetos cuidadosamente criados para diversas indústrias e necessidades.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="project-card card rounded-xl overflow-hidden transition duration-300 relative">
+                    <div class="h-60 overflow-hidden">
+                        <img src="https://placehold.co/1200x800" alt="Dashboard de negócios moderno com gráficos analíticos e widgets visuais em tons de azul" class="w-full h-full object-cover" />
+                    </div>
+                    <div class="p-6 flex flex-col h-64">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold">Sistema de Gestão</h3>
+                            <span class="text-xs px-3 py-1 bg-gray-200 dark:bg-gray-700 rounded-full">Destaque</span>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4 flex-grow">
+                            Dashboard completo para gestão empresarial com análises em tempo real e relatórios personalizados.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="tech-tag text-xs px-2 py-1 rounded">React</span>
+                            <span class="tech-tag text-xs px-2 py-1 rounded">Node.js</span>
+                            <span class="tech-tag text-xs px-2 py-1 rounded">MongoDB</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <a href="#" class="text-primary font-medium hover:underline">Ver Detalhes</a>
+                            <button class="text-xs px-3 py-1 rounded-full bg-primary text-white hover:bg-opacity-90">Comprar Template</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card card rounded-xl overflow-hidden transition duration-300 relative">
+                    <div class="h-60 overflow-hidden">
+                        <img src="https://placehold.co/1200x800" alt="Site de e-commerce elegante com produtos de moda exibidos em um layout limpo e sofisticado" class="w-full h-full object-cover" />
+                    </div>
+                    <div class="p-6 flex flex-col h-64">
+                        <h3 class="text-xl font-bold mb-2">Loja Virtual Premium</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4 flex-grow">
+                            Plataforma de e-commerce de alto desempenho com experiência de compra otimizada para conversão.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="tech-tag text-xs px-2 py-1 rounded">Next.js</span>
+                            <span class="tech-tag text-xs px-2 py-1 rounded">Shopify</span>
+                            <span class="tech-tag text-xs px-2 py-1 rounded">Tailwind CSS</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <a href="#" class="text-primary font-medium hover:underline">Ver Detalhes</a>
+                            <button class="text-xs px-3 py-1 rounded-full bg-primary text-white hover:bg-opacity-90">Comprar Template</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card card rounded-xl overflow-hidden transition duration-300 relative">
+                    <div class="h-60 overflow-hidden">
+                        <img src="https://placehold.co/1200x800" alt="Aplicativo móvel de saúde fitness mostrando rotas de corrida, estatísticas e métricas em um design moderno" class="w-full h-full object-cover" />
+                    </div>
+                    <div class="p-6 flex flex-col h-64">
+                        <h3 class="text-xl font-bold mb-2">App Fitness Mobile</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4 flex-grow">
+                            Aplicativo de acompanhamento de atividades físicas com desafios personalizados e integração com wearables.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="tech-tag text-xs px-2 py-1 rounded">Flutter</span>
+                            <span class="tech-tag text-xs px-2 py-1 rounded">Firebase</span>
+                            <span class="tech-tag text-xs px-2 py-1 rounded">Google Fit API</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <a href="#" class="text-primary font-medium hover:underline">Ver Detalhes</a>
+                            <button class="text-xs px-3 py-1 rounded-full bg-primary text-white hover:bg-opacity-90">Comprar Template</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="project-card card rounded-xl overflow-hidden transition duration-300 relative">
+                    <div class="h-60 overflow-hidden">
+                        <img src="https://placehold.co/1200x800" alt="Portal de notícias moderno com layout de cards categorizados e tipografia impactante" class="w-full h-full object-cover" />
+                    </div>
+                    <div class="p-6 flex flex-col h-64">
+                        <h3 class="text-xl font-bold mb-2">Portal de Notícias</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4 flex-grow">
+                            Plataforma de publicação digital com gestão de conteúdo avançada e sistema de assinaturas.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="tech-tag text-xs px-2 py-1 rounded">WordPress</span>
+                            <span class="tech-tag text-xs px-2 py-1 rounded">PHP</span>
+                            <span class="tech-tag text-xs px-2 py-1 rounded">MySQL</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <a href="#" class="text-primary font-medium hover:underline">Ver Detalhes</a>
+                            <button class="text-xs px-3 py-1 rounded-full bg-primary text-white hover:bg-opacity-90">Comprar Template</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="project-card card rounded-xl overflow-hidden transition duration-300 relative">
+                    <div class="h-60 overflow-hidden">
+                        <img src="https://placehold.co/1200x800" alt="Interface de finanças pessoais mostrando gráficos e controles de orçamento com uma paleta suave" class="w-full h-full object-cover" />
+                    </div>
+                    <div class="p-6 flex flex-col h-64">
+                        <h3 class="text-xl font-bold mb-2">Gestor Financeiro</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4 flex-grow">
+                            Ferramenta completa para controle financeiro pessoal com análises preditivas e planejamento orçamentário.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="tech-tag text-xs px-2 py-1 rounded">Vue.js</span>
+                            <span class="tech-tag text-xs px-2 py-1 rounded">GraphQL</span>
+                            <span class="tech-tag text-xs px-2 py-1 rounded">D3.js</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <a href="#" class="text-primary font-medium hover:underline">Ver Detalhes</a>
+                            <button class="text-xs px-3 py-1 rounded-full bg-primary text-white hover:bg-opacity-90">Comprar Template</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 6 -->
+                <div class="project-card card rounded-xl overflow-hidden transition duration-300 relative">
+                    <div class="h-60 overflow-hidden">
+                        <img src="https://placehold.co/1200x800" alt="Site institucional de arquitetura com galeria de projetos em grids e tipografia sofisticada" class="w-full h-full object-cover" />
+                    </div>
+                    <div class="p-6 flex flex-col h-64">
+                        <h3 class="text-xl font-bold mb-2">Portfólio Arquitetônico</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4 flex-grow">
+                            Website elegante para exibição de projetos arquitetônicos com galeria tridimensional e tour virtual.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="tech-tag text-xs px-2 py-1 rounded">Three.js</span>
+                            <span class="tech-tag text-xs px-2 py-1 rounded">GSAP</span>
+                            <span class="tech-tag text-xs px-2 py-1 rounded">WebGL</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <a href="#" class="text-primary font-medium hover:underline">Ver Detalhes</a>
+                            <button class="text-xs px-3 py-1 rounded-full bg-primary text-white hover:bg-opacity-90">Comprar Template</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <a href="#" class="inline-block border border-primary text-primary hover:bg-primary hover:text-white px-6 py-3 rounded-lg font-medium transition duration-300">
+                    Ver Todos os Projetos
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Nossos <span class="gradient-text">Serviços</span></h2>
+                <p class="text-lg max-w-2xl mx-auto opacity-90">
+                    Soluções completas para todas as etapas do seu projeto digital.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="card p-8 rounded-xl transition hover:shadow-lg">
+                    <div class="w-16 h-16 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Desenvolvimento Web</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        Sites institucionais, portais complexos e aplicações web sob medida com as melhores tecnologias do mercado.
+                    </p>
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary mr-2" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                            </svg>
+                            Front-end moderno
+                        </li>
+                        <li class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary mr-2" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                            </svg>
+                            Back-end robusto
+                        </li>
+                        <li class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary mr-2" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                            </svg>
+                            Integração com APIs
+                        </li>
+                    </ul>
+                    <a href="#" class="text-primary font-medium hover:underline inline-flex items-center">
+                        Saiba mais
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </a>
+                </div>
+
+                
