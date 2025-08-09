@@ -1,119 +1,106 @@
-// script.js - comportamentos: tema, menu mobile, injeção de projetos, formulário, preview e checkout
+// Theme toggle + persist
+const root = document.documentElement;
+const themeToggle = document.getElementById('theme-toggle');
+const menuBtn = document.getElementById('menu-btn');
+const nav = document.querySelector('.nav');
+const yearEl = document.getElementById('year');
 
-const $ = s => document.querySelector(s);
-const $$ = s => Array.from(document.querySelectorAll(s));
+function applyTheme(theme){
+  document.documentElement.setAttribute('data-theme', theme);
+  themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+}
 
-document.addEventListener('DOMContentLoaded', async () => {
-  const root = document.documentElement;
-  const year = $('#year');
-  if(year) year.textContent = new Date().getFullYear();
+const saved = localStorage.getItem('vtrs_theme');
+if(saved) applyTheme(saved);
+else {
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  applyTheme(prefersDark ? 'dark' : 'light');
+}
 
-  // Tema (localStorage + preferências do sistema)
-  const saved = localStorage.getItem('site-theme');
-  if(saved) root.setAttribute('data-theme', saved);
-  else if(window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) root.setAttribute('data-theme','light');
-  else root.setAttribute('data-theme','dark');
-
-  $('#theme-toggle').addEventListener('click', () => {
-    const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-    root.setAttribute('data-theme', next);
-    localStorage.setItem('site-theme', next);
-  });
-
-  // Mobile menu
-  const menuBtn = $('#menu-btn');
-  const mobileMenu = $('#mobile-menu');
-  menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('active'));
-  $$('.mobile-link').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('active')));
-
-  // Carregar projetos do JSON
-  let projects = [];
-  try {
-    const res = await fetch('projects.json');
-    projects = await res.json();
-  } catch (err) {
-    console.warn('Não foi possível ler projects.json — usando demos internos.');
-    projects = [
-      {id:1,title:'Template E-commerce',desc:'Loja rápida com checkout integrado.',img:'https://placehold.co/800x500?text=E-commerce',price:99,tags:['Next.js','Tailwind']},
-      {id:2,title:'Landing Empresa',desc:'Landing com conversão otimizada.',img:'https://placehold.co/800x500?text=Landing',price:79,tags:['HTML','CSS','JS']},
-      {id:3,title:'Dashboard Admin',desc:'Painel com gráficos e tabelas dinâmicas.',img:'https://placehold.co/800x500?text=Dashboard',price:149,tags:['React','D3']},
-      {id:4,title:'Portfólio Fotografia',desc:'Galeria com lightbox e filtros.',img:'https://placehold.co/800x500?text=Fotografia',price:59,tags:['Gallery']},
-      {id:5,title:'Blog Moderno',desc:'Sistema de posts com leitura limpa.',img:'https://placehold.co/800x500?text=Blog',price:49,tags:['Gatsby','MDX']},
-      {id:6,title:'App Fitness',desc:'App com histórico e integração de APIs.',img:'https://placehold.co/800x500?text=Fitness',price:129,tags:['Flutter']}
-    ];
-  }
-
-  const grid = $('#projects-grid');
-  let visible = 3;
-
-  function renderProjects(){
-    grid.innerHTML = '';
-    projects.slice(0,visible).forEach(p => {
-      const card = document.createElement('article');
-      card.className = 'project-card';
-      card.innerHTML = `
-        <img src="${p.img}" alt="${p.title}" />
-        <h4>${p.title}</h4>
-        <p>${p.desc}</p>
-        <div class="project-actions">
-          <button class="btn btn-outline" data-id="${p.id}">Preview</button>
-          <button class="btn btn-primary" data-buy="${p.id}">Comprar — R$${p.price}</button>
-        </div>
-      `;
-      grid.appendChild(card);
-    });
-  }
-
-  renderProjects();
-
-  $('#load-more').addEventListener('click', () => {
-    visible = Math.min(projects.length, visible + 3);
-    renderProjects();
-    if(visible >= projects.length) $('#load-more').style.display = 'none';
-  });
-
-  // Delegation para preview e compra
-  grid.addEventListener('click', e => {
-    const previewBtn = e.target.closest('[data-id]');
-    const buyBtn = e.target.closest('[data-buy]');
-    if(previewBtn){
-      const id = +previewBtn.getAttribute('data-id');
-      openPreview(id);
-    }
-    if(buyBtn){
-      const id = +buyBtn.getAttribute('data-buy');
-      openCheckout(id);
-    }
-  });
-
-  function openPreview(id){
-    const p = projects.find(x=>x.id===id);
-    if(!p) return alert('Projeto não encontrado');
-    const w = window.open('', '_blank', 'width=1000,height=700');
-    w.document.write(`<!doctype html><html><head><title>${p.title}</title><meta name=viewport content='width=device-width,initial-scale=1'><style>body{font-family:Inter,Arial;padding:20px;background:#f3f4f6}img{max-width:100%}</style></head><body><h1>${p.title}</h1><img src="${p.img}" alt="${p.title}"><p>${p.desc}</p><p><strong>Preço: R$${p.price}</strong></p></body></html>`);
-  }
-
-  function openCheckout(id){
-    const p = projects.find(x=>x.id===id);
-    if(!p) return;
-    // Checkout mínimo (substitua por PayPal/PayPal Buttons, PagSeguro, MercadoPago, ou sua rota de pagamento)
-    const ok = confirm(`Comprar "${p.title}" por R$${p.price}? Clique OK para ir ao checkout.`);
-    if(ok){
-      // exemplo: redirecionar para um link de pagamento; se quiser posso gerar botão PayPal/PayPal.Me
-      window.location.href = `https://your-payment-link.example/checkout?product=${encodeURIComponent(p.title)}&price=${p.price}`;
-    }
-  }
-
-  // Formulário
-  $('#contact-form').addEventListener('submit', e => {
-    e.preventDefault();
-    const data = Object.fromEntries(new FormData(e.target).entries());
-    // aqui você pode enviar para sua API. Exemplo: fetch('/api/contact', {method:'POST',body:JSON.stringify(data)})
-    console.log('Contato enviado', data);
-    alert('Mensagem enviada — vou responder por e-mail!');
-    e.target.reset();
-  });
-
-  $('#clear-form').addEventListener('click', () => $('#contact-form').reset());
-
+themeToggle.addEventListener('click', ()=>{
+  const cur = document.documentElement.getAttribute('data-theme') || 'light';
+  const next = cur === 'dark' ? 'light' : 'dark';
+  applyTheme(next);
+  localStorage.setItem('vtrs_theme', next);
 });
+
+// Mobile menu
+menuBtn.addEventListener('click', ()=>{ nav.classList.toggle('open'); });
+
+// Projects filtering
+const filters = document.querySelectorAll('.filter');
+const cards = document.querySelectorAll('#projects-grid .card');
+filters.forEach(f=> f.addEventListener('click', ()=>{
+  filters.forEach(x=>x.classList.remove('active'));
+  f.classList.add('active');
+  const cat = f.dataset.filter;
+  cards.forEach(card=>{
+    if(cat === '*' || card.dataset.category === cat) card.style.display = '';
+    else card.style.display = 'none';
+  });
+}));
+
+// Modal preview
+const modal = document.getElementById('modal');
+const modalTitle = document.getElementById('modal-title');
+const modalIframe = document.getElementById('modal-iframe');
+const modalClose = document.getElementById('modal-close');
+const modalBuy = document.getElementById('modal-buy');
+const modalCode = document.getElementById('modal-code');
+
+document.addEventListener('click', (e)=>{
+  const btn = e.target.closest('[data-action]');
+  if(!btn) return;
+  const action = btn.dataset.action;
+  if(action === 'preview'){
+    const src = btn.dataset.src;
+    const title = btn.dataset.title;
+    modalTitle.textContent = title;
+    modalIframe.src = src;
+    modal.setAttribute('aria-hidden','false');
+    modalBuy.dataset.id = btn.dataset.id || '';
+    modalCode.href = src;
+  }
+  if(action === 'buy'){
+    const id = btn.dataset.id || 'produto';
+    alert('Comprar: ' + id + ' — excecutar fluxo de pagamento aqui.');
+  }
+});
+
+modalClose.addEventListener('click', ()=> closeModal());
+modal.addEventListener('click', (e)=>{ if(e.target === modal) closeModal(); });
+function closeModal(){ modal.setAttribute('aria-hidden','true'); modalIframe.src = 'about:blank'; }
+
+// Contact form (exemplo) — substituir integração real quando necessário
+const form = document.getElementById('contact-form');
+form.addEventListener('submit', (e)=>{
+  e.preventDefault();
+  const data = new FormData(form);
+  const payload = Object.fromEntries(data.entries());
+  // Exemplo: salvar em backend ou enviar por email
+  console.log('Contato enviado', payload);
+  alert('Mensagem enviada! Em breve eu respondo.');
+  form.reset();
+});
+
+// small utils
+yearEl.textContent = new Date().getFullYear();
+
+// Accessibility: close modal with ESC
+document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeModal(); });
+
+// Lazy image loading fallback
+if('loading' in HTMLImageElement.prototype){
+  document.querySelectorAll('img[loading="lazy"]').forEach(img => img.src = img.dataset.src || img.src);
+}
+
+// Simple animation on scroll (lightweight)
+const reveal = ()=>{
+  document.querySelectorAll('.card, .service-card, .hero-left').forEach(el=>{
+    const rect = el.getBoundingClientRect();
+    if(rect.top < window.innerHeight - 60) el.style.transform = 'translateY(0)';
+    else el.style.transform = 'translateY(20px)';
+    el.style.transition = 'all 600ms cubic-bezier(.22,.9,.28,1)';
+  });
+};
+window.addEventListener('scroll', reveal); window.addEventListener('load', reveal);
