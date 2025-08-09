@@ -6,6 +6,7 @@
     <title>Portfólio Criativo | Venda seus Projetos</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        /* === VARIÁVEIS === */
         :root {
             --primary-light: #6366f1;
             --primary-dark: #4f46e5;
@@ -35,6 +36,179 @@
             --bg: var(--bg-dark);
             --card: var(--card-dark);
             --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.25);
+        }
+
+        /* === BASE === */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            transition: all 0.3s ease;
+        }
+
+        .theme-transition * {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .card {
+            background-color: var(--card);
+            box-shadow: var(--shadow);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* === BOTÕES === */
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        .btn-secondary {
+            background-color: var(--secondary);
+            color: white;
+        }
+
+        /* === ANIMAÇÕES === */
+        .animate-float { animation: float 6s ease-in-out infinite; }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* === NAV === */
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* === MOBILE MENU === */
+        .hamburger { display: none; cursor: pointer; }
+        @media (max-width: 768px) {
+            .hamburger { display: block; }
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background-color: var(--card);
+                padding: 2rem;
+                transition: right 0.3s ease;
+                z-index: 100;
+            }
+            .nav-menu.active { right: 0; }
+        }
+    </style>
+</head>
+<body class="theme-transition">
+    
+    <!-- HEADER -->
+    <header class="sticky top-0 z-50 bg-white/80 dark:bg-gray-800/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold gradient-text">PortDev</a>
+            <div class="hamburger" id="hamburger">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </div>
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#home" class="nav-link font-medium">Início</a>
+                <a href="#projects" class="nav-link font-medium">Projetos</a>
+                <a href="#services" class="nav-link font-medium">Serviços</a>
+                <a href="#about" class="nav-link font-medium">Sobre</a>
+                <a href="#contact" class="nav-link font-medium">Contato</a>
+                <button id="theme-toggle" class="p-2 rounded-full focus:outline-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path id="theme-icon" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1z" />
+                    </svg>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section id="home" class="hero-pattern py-20">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center gap-12">
+            <div class="md:w-1/2">
+                <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+                    Transforme suas <span class="gradient-text">ideias</span> em experiências digitais
+                </h1>
+                <p class="text-lg mb-8 opacity-90">
+                    Sites personalizados com designs impressionantes e tecnologia de ponta.
+                </p>
+                <div class="flex gap-4">
+                    <a href="#contact" class="btn-primary px-6 py-3 rounded-lg font-medium">Comece seu Projeto</a>
+                    <a href="#projects" class="border border-primary text-primary px-6 py-3 rounded-lg font-medium">Ver Portfólio</a>
+                </div>
+            </div>
+            <div class="md:w-1/2 animate-float">
+                <img src="https://placehold.co/600x400" alt="Designer" class="rounded-xl shadow-xl" />
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="py-20">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold">Nossos <span class="gradient-text">Serviços</span></h2>
+                <p class="text-lg opacity-90">Soluções completas para todas as etapas do seu projeto digital.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Serviço 1 -->
+                <div class="card p-8 rounded-xl hover:shadow-lg transition">
+                    <h3 class="text-xl font-bold mb-4">Desenvolvimento Web</h3>
+                    <p class="mb-4">Sites institucionais, portais complexos e aplicações web sob medida.</p>
+                    <a href="#" class="text-primary font-medium hover:underline">Saiba mais</a>
+                </div>
+                <!-- Serviço 2 -->
+                <div class="card p-8 rounded-xl hover:shadow-lg transition">
+                    <h3 class="text-xl font-bold mb-4">E-commerce</h3>
+                    <p class="mb-4">Lojas virtuais otimizadas para vendas e alto desempenho.</p>
+                    <a href="#" class="text-primary font-medium hover:underline">Saiba mais</a>
+                </div>
+                <!-- Serviço 3 -->
+                <div class="card p-8 rounded-xl hover:shadow-lg transition">
+                    <h3 class="text-xl font-bold mb-4">Design UI/UX</h3>
+                    <p class="mb-4">Experiências visuais modernas, intuitivas e responsivas.</p>
+                    <a href="#" class="text-primary font-medium hover:underline">Saiba mais</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SCRIPT -->
+    <script>
+        // Menu mobile
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+        hamburger.addEventListener('click', () => navMenu.classList.toggle('active'));
+
+        // Troca de tema
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            document.documentElement.setAttribute('data-theme', currentTheme === 'light' ? 'dark' : 'light');
+        });
+    </script>
+</body>
+</html>            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.25);
         }
 
         body {
